@@ -1,0 +1,124 @@
+{% extends 'applicant/base-auth.html' %}
+{% load static %}
+{% block title %} Sign Up {% endblock title %}
+{% block styles %}
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/app.min.css' %}">
+  <link rel="stylesheet" href="{% static 'applicant/assets/bundles/izitoast/css/iziToast.min.css' %}">
+  <link rel="stylesheet" href="{% static 'applicant/assets/bundles/jquery-selectric/selectric.css' %}">
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/components.css' %}">
+  <!-- Custom style CSS -->
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/custom.css' %}">
+  <link rel="stylesheet" href="{% static 'applicant/assets/bundles/select2/dist/css/select2.min.css' %}">
+  <link rel='shortcut icon' type='image/x-icon' href="{% static 'applicant/assets/img/favicon.ico' %}"/>
+{% endblock styles %}
+{% block content %}
+    <section class="section">
+      <div class="container mt-5">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible show fade">
+                  <div class="alert-body">
+                    <button class="close" data-dismiss="alert">
+                      <span>&times;</span>
+                    </button>
+                    {{ message }}
+                  </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div id="alert-box"></div>
+        <div class="row">
+          <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h4>Register</h4>
+              </div>
+              <div class="card-body">
+                <form id="applicant-sign-up-form" action="{% url 'applicant:sign_up' %}">
+                  {% csrf_token %}
+                  <div class="row">
+                    <div class="form-group col-6">
+                      <label for="id_first_name">First Name</label>
+                      <input id="id_first_name" type="text" class="form-control" name="first_name">
+                      <div id="error-first-name" class="text-danger">
+                          {{form.errors.first_name}}
+                      </div>
+                    </div>
+                    <div class="form-group col-6">
+                      <label for="id_last_name">Last Name</label>
+                      <input id="id_last_name" type="text" class="form-control" name="last_name">
+                      <div id="error-last-name" class="text-danger">
+                          {{form.errors.last_name}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="id_email">Email</label>
+                    <input id="id_email" type="email" class="form-control" name="email">
+                    <div id="error-email" class="text-danger">
+                        {{form.errors.email}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-6">
+                      <label for="id_password1" class="d-block">Password</label>
+                      <input id="id_password1" type="password" class="form-control pwstrength" data-indicator="pwindicator" name="password1">
+                      <div id="pwindicator" class="pwindicator">
+                        <div class="bar"></div>
+                        <div class="label"></div>
+                      </div>
+                      <div id="error-password1" class="text-danger">
+                          {{form.errors.password1}}
+                      </div>
+                    </div>
+                    <div class="form-group col-6">
+                      <label for="id_password2" class="d-block">Password Confirmation</label>
+                      <input id="id_password2" type="password" class="form-control" name="password2">
+                      <div id="error-password2" class="text-danger">
+                          {{form.errors.password2}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" name="agree" class="custom-control-input" id="agree" required>
+                      <label class="custom-control-label" for="agree">I agree with the terms and conditions</label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" id="sign-up-button">
+                      Register
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div class="mb-4 text-muted text-center">
+                Already Registered? <a href="{% url 'applicant:login' %}">Login</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endblock content %}
+  {% block scripts %}
+  <!-- General JS Scripts -->
+  <script src="{% static 'applicant/assets/js/app.min.js' %}"></script>
+  <!-- JS Libraies -->
+  <script src="{% static 'applicant/assets/bundles/jquery-pwstrength/jquery.pwstrength.min.js' %}"></script>
+  <script src="{% static 'applicant/assets/bundles/jquery-selectric/jquery.selectric.min.js' %}"></script>
+  <!-- Page Specific JS File -->
+  <script src="{% static 'applicant/assets/js/page/auth-register.js' %}"></script>
+  <!-- Template JS File -->
+  <script src="{% static 'applicant/assets/js/scripts.js' %}"></script>
+  <!-- Custom JS File -->
+  <script src="{% static 'applicant/assets/js/sign-up.js' %}"></script>
+  <script src="{% static 'applicant/assets/bundles/select2/dist/js/select2.full.min.js' %}"></script>
+  <script src="{% static 'applicant/assets/bundles/izitoast/js/iziToast.min.js' %}"></script>
+<script>
+  login = "{% url 'applicant:login' %}"
+</script>
+{% endblock scripts %}

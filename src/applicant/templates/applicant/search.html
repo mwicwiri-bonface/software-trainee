@@ -1,0 +1,53 @@
+{% extends 'applicant/base.html' %}
+{% load static %}
+{% block title %} Search results for: {{q}}{% endblock title %}
+{% block styles %}
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/app.min.css' %}">
+  <link rel="stylesheet" href="{% static 'applicant/assets/bundles/chocolat/dist/css/chocolat.css' %}">
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/components.css' %}">
+  <!-- Custom style CSS -->
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/custom.css' %}">
+  <link rel='shortcut icon' type='image/x-icon' href="{% static 'applicant/assets/img/favicon.ico' %}"/>
+{% endblock styles %}
+{% block content %}
+        <section class="section">
+          <div class="section-body">
+            <div class="row">
+              {% for object in jobs %}
+              {% if object.exists %}
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h4>{{object.name}}</h4>
+                  </div>
+                  <div class="card-body">
+                    {{object.description}}
+                  </div>
+                  <div class="card-footer text-right">
+                    <button class="btn btn-primary apply-btn" data-slug="{{object.slug}}" id="{{object.slug}}"><i class="fas fa-suitcase"></i> Apply</button>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              {% empty %}
+              <h2 class="text-muted"> Sorry no results found for: {{q}}</h2>
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+                {% endblock content %}
+{% block scripts %}
+  <!-- General JS Scripts -->
+  <script src="{% static 'applicant/assets/js/app.min.js' %}"></script>
+  <!-- JS Libraies -->
+  <script src="{% static 'applicant/assets/bundles/chocolat/dist/js/jquery.chocolat.min.js' %}"></script>
+  <script src="{% static 'applicant/assets/bundles/jquery-ui/jquery-ui.min.js' %}"></script>
+  <!-- Page Specific JS File -->
+  <!-- Template JS File -->
+  <script src="{% static 'applicant/assets/js/scripts.js' %}"></script>
+  <!-- Custom JS File -->
+  <script src="{% static 'applicant/assets/js/custom.js' %}"></script>
+{% endblock scripts %}

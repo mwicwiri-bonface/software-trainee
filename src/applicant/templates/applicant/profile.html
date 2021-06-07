@@ -1,0 +1,127 @@
+{% extends 'applicant/base.html' %}
+{% load static %}
+{% block title %} Profile {% endblock title %}
+{% block styles %}
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/app.min.css' %}">
+  <link rel="stylesheet" href="{% static 'applicant/assets/bundles/bootstrap-social/bootstrap-social.css' %}">
+  <link rel="stylesheet" href="{% static 'applicant/assets/bundles/summernote/summernote-bs4.css' %}">
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/components.css' %}">
+  <!-- Custom style CSS -->
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/custom.css' %}">
+  <link rel='shortcut icon' type='image/x-icon' href="{% static 'applicant/assets/img/favicon.ico' %}"/>
+{% endblock styles %}
+{% block content %}
+        <section class="section">
+          <div class="section-body">
+            <div class="row mt-sm-4">
+               <div class="col-12 col-sm-12 col-lg-12">
+                <div class="card profile-widget">
+                  <div class="profile-widget-header">
+                    <img alt="image" src="{{request.user.applicant.applicantprofile.image.url}}" class="rounded-circle profile-widget-picture">
+                  </div>
+                  <div class="profile-widget-description pb-0">
+                    <div class="profile-widget-name">{{request.user.applicant.applicantprofile.get_title_display}} {{request.user.applicant.get_full_name}}  / {{request.user.applicant.applicantprofile.nationality.name}} </div>
+                    <p>{{request.user.applicant.applicantprofile.bio}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                  <form id="edit-profile" method="post" action="{% url 'applicant:profile' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="card-header">
+                      <h4>Edit Profile</h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="form-group col-md-2 col-12">
+                          <label>Select title</label>
+                          <select name="title" id="id_title" class="form-control select2">
+                            {% for form in p_form.title %}
+                            {{form}}
+                            {% endfor %}
+                          </select>
+                          <div id="error-title" class="text-danger"></div>
+                        </div>
+                        <div class="form-group col-md-5 col-12">
+                          <label>First Name</label>
+                          <input type="text" class="form-control" name="first_name" id="id_first_name" value="{{request.user.applicant.first_name}}">
+                          <div id="error-first-name" class="text-danger"></div>
+                        </div>
+                        <div class="form-group col-md-5 col-12">
+                          <label>Last Name</label>
+                          <input type="text" class="form-control" name="last_name" id="id_last_name" value="{{request.user.applicant.last_name}}">
+                          <div id="error-last-name" class="text-danger"></div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-md-7 col-12">
+                          <label>Email</label>
+                          <input type="email" class="form-control" name="email" id="id_email" value="{{request.user.applicant.email}}">
+                          <div id="error-email" class="text-danger"></div>
+                        </div>
+                        <div class="form-group col-md-5 col-12">
+                          <label>Phone</label>
+                          <input type="tel" class="form-control" name="phone_number" id="id_phone_number" value="{{request.user.applicant.applicantprofile.phone_number}}">
+                          <div id="error-phone-number" class="text-danger">
+                        </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-md-7 col-12">
+                          <label>Select Nationality</label>
+                          <select  class="form-control select2" name="nationality" id="id_nationality">
+                            {% for form in p_form.nationality %}
+                            {{form}}
+                            {% endfor %}
+                          </select>
+                          <div id="error-nationality" class="text-danger"></div>
+                        </div>
+                        <div class="form-group col-md-5 col-12">
+                          <label>Select Gender</label>
+                          <select name="gender" id="id_gender" class="form-control select2">
+                            {% for form in p_form.gender %}
+                            {{form}}
+                            {% endfor %}
+                          </select>
+                          <div id="error-gender" class="text-danger"></div>
+                        </div>
+                      </div>
+                      <div class="custom-file">
+                        <input type="file" name="image" class="custom-file-input" id="id_image" value="{{request.user.applicant.applicantprofile.image.url}}">
+                        <label class="custom-file-label" for="id_image">Choose Image</label>
+                        <div id="error-image" class="text-danger"></div>
+                      </div>
+                      <div class="form-group">
+                        <label>Bio</label>
+                        <textarea class="form-control" name="bio" id="id_bio" required>{{request.user.applicant.applicantprofile.bio}}</textarea>
+                        <div id="error-bio" class="text-danger"></div>
+                      </div>
+                      <div class="form-group mb-0">
+                        <div id="progress-box"></div>
+                      </div>
+                    </div>
+                    <div class="card-footer text-right">
+                      <button class="btn btn-primary" type="submit"><i class="far fa-edit"></i> Save Changes</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        {% endblock content %}
+{% block scripts %}
+  <!-- General JS Scripts -->
+  <script src="{% static 'applicant/assets/js/app.min.js' %}"></script>
+  <!-- JS Libraies -->
+  <script src="{% static 'applicant/assets/bundles/summernote/summernote-bs4.js' %}"></script>
+  <!-- Page Specific JS File -->
+  <!-- Template JS File -->
+  <script src="{% static 'applicant/assets/js/scripts.js' %}"></script>
+  <!-- Custom JS File -->
+  <script  src="{% static 'applicant/assets/js/profile.js' %}"></script>
+{% endblock scripts %}

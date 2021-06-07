@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- auth-forgot-password.html  21 Nov 2019 04:05:02 GMT -->
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>{% block title %}{% endblock title %} :: Software Trainee applicant.</title>
+  {% block styles %}
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/app.min.css' %}">
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/components.css' %}">
+  <!-- Custom style CSS -->
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/custom.css' %}">
+  <link rel='shortcut icon' type='image/x-icon' href="{% static 'applicant/assets/img/favicon.ico' %}" />
+  {% endblock styles %}
+</head>
+
+<body>
+  <div class="loader"></div>
+  <div id="app">
+    {% block content %}{% endblock content %}
+  </div>
+  {% block scripts %}
+  <!-- General JS Scripts -->
+  <script src="{% static 'applicant/assets/js/app.min.js' %}"></script>
+  <!-- JS Libraies -->
+  <!-- Page Specific JS File -->
+  <!-- Template JS File -->
+  <script src="{% static 'applicant/assets/js/scripts.js' %}"></script>
+  <!-- Custom JS File -->
+  <script src="{% static 'applicant/assets/js/custom.js' %}"></script>
+{% endblock scripts %}
+</body>
+
+
+<!-- auth-forgot-password.html  21 Nov 2019 04:05:02 GMT -->
+</html>

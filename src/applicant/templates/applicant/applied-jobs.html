@@ -1,0 +1,73 @@
+{% extends 'applicant/base.html' %}
+{% load static %}
+{% block title %} Applied Jobs {% endblock title %}
+{% block styles %}  <!-- General CSS Files -->
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/app.min.css' %}">
+  <link rel="stylesheet" href="{% static 'applicant/assets/bundles/datatables/datatables.min.css' %}">
+  <link rel="stylesheet" href="{% static 'applicant/assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css' %}">
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/components.css' %}">
+  <!-- Custom style CSS -->
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/custom.css' %}">
+  <link rel='shortcut icon' type='image/x-icon' href="{% static 'applicant/assets/img/favicon.ico' %}"/>
+{% endblock styles %}
+{% block content %}
+        <section class="section">
+          <div class="section-body">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Applied Jobs</h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-striped" id="table-1">
+                        <thead>
+                          <tr>
+                            <th class="text-center">
+                              #
+                            </th>
+                            <th>Name</th>
+                            <th>Date Created</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for object in jobs %}
+                          <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{object.job.name}}</td>
+                            <td>{{object.job.created}}</td>
+                            <td>
+                              <div class="badge badge-success badge-shadow">Applied</div>
+                            </td>
+                            <td><a href="#" class="btn btn-primary">Detail</a></td>
+                          </tr>
+                        {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+       {% endblock content %}
+{% block scripts %}
+  <!-- General JS Scripts -->
+  <script src="{% static 'applicant/assets/js/app.min.js' %}"></script>
+  <!-- JS Libraies -->
+  <script src="{% static 'applicant/assets/bundles/datatables/datatables.min.js' %}"></script>
+  <script src="{% static 'applicant/assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js' %}"></script>
+  <script src="{% static 'applicant/assets/bundles/jquery-ui/jquery-ui.min.js' %}"></script>
+  <!-- Page Specific JS File -->
+  <script src="{% static 'applicant/assets/js/page/datatables.js' %}"></script>
+  <!-- Template JS File -->
+  <script src="{% static 'applicant/assets/js/scripts.js' %}"></script>
+  <!-- Custom JS File -->
+  <script src="{% static 'applicant/assets/js/custom.js' %}"></script>
+{% endblock scripts %}

@@ -1,0 +1,56 @@
+{% extends 'applicant/base.html' %}
+{% load static %}
+{% block title %} Feedback {% endblock title %}
+{% block styles %}
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/app.min.css' %}">
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/components.css' %}">
+  <!-- Custom style CSS -->
+  <link rel="stylesheet" href="{% static 'applicant/assets/css/custom.css' %}">
+  <link rel='shortcut icon' type='image/x-icon' href="{% static 'applicant/assets/img/favicon.ico' %}"/>
+{% endblock styles %}
+{% block content %}
+        <section class="section">
+          <div class="section-body">
+            <div class="row">
+              <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                  <form method="post" action="{% url 'applicant:feedback_api' %}" id="feedback">
+                    {% csrf_token %}
+                    <div class="card-header">
+                      <h4>Feedback</h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label>Subject</label>
+                        <input type="text" class="form-control" name="subject" id="id_subject" required>
+                        <div id="error-subject" class="text-danger"></div>
+                      </div>
+                      <div class="form-group mb-0">
+                        <label>Message</label>
+                        <textarea class="form-control" name="message" id="id_message" required=""></textarea>
+                        <div id="error-message" class="text-danger"></div>
+                      </div>
+                    </div>
+                    <div class="card-footer text-right">
+                      <button class="btn btn-primary" type="submit" id="feedback-btn"><i class="fas fa-comment-alt"></i> Send</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        {% endblock content %}
+{% block scripts %}
+  <!-- General JS Scripts -->
+  <script src="{% static 'applicant/assets/js/app.min.js' %}"></script>
+  <!-- JS Libraies -->
+  <!-- Page Specific JS File -->
+  <!-- Template JS File -->
+  <script src="{% static 'applicant/assets/js/scripts.js' %}"></script>
+  <!-- Custom JS File -->
+  <script src="{% static 'applicant/assets/js/feedback.js' %}"></script>
+{% endblock scripts %}
